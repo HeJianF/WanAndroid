@@ -1,0 +1,8 @@
+ext {
+    ButterKnifeVersion = '10.1.0'
+
+    majorFrame = [
+            ButterKnife: "com.jakewharton:butterknife:${ButterKnifeVersion}",
+            aptButterKnifeCompiler: "com.jakewharton:butterknife-compiler:${ButterKnifeVersion}"
+    ]
+}

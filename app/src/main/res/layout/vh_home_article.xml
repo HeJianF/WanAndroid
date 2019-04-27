@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/article_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/layout_marginLeft"
+        android:layout_marginLeft="@dimen/layout_marginLeft"
+        android:layout_marginEnd="@dimen/layout_marginRight"
+        android:layout_marginRight="@dimen/layout_marginRight"
+        android:textColor="@color/C_000000"
+        android:textSize="16sp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:text="测试标题" />
+
+    <TextView
+        android:id="@+id/_article_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/_article_author"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/article_title"
+        app:layout_constraintTop_toBottomOf="@+id/article_title" />
+
+    <TextView
+        android:id="@+id/article_author"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/_article_author"
+        app:layout_constraintTop_toBottomOf="@+id/article_title"
+        app:layout_constraintTop_toTopOf="@+id/_article_author"
+        tools:text="何建峰" />
+
+    <TextView
+        android:id="@+id/_article_nice_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="3dp"
+        android:text="@string/_article_time"
+        android:textSize="12sp"
+        app:layout_constraintStart_toStartOf="@+id/_article_author"
+        app:layout_constraintTop_toBottomOf="@+id/_article_author" />
+
+    <TextView
+        android:id="@+id/article_nice_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textSize="12sp"
+        app:layout_constraintLeft_toRightOf="@+id/_article_nice_date"
+        app:layout_constraintTop_toBottomOf="@+id/article_title"
+        app:layout_constraintTop_toTopOf="@+id/_article_nice_date"
+        tools:text="1天前" />
+</androidx.constraintlayout.widget.ConstraintLayout>
