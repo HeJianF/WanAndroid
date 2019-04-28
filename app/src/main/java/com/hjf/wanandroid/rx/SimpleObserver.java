@@ -1,7 +1,5 @@
 package com.hjf.wanandroid.rx;
 
-import android.util.Log;
-
 import com.hjf.wanandroid.utils.NetUtils;
 
 import io.reactivex.Observer;
@@ -17,24 +15,20 @@ public class SimpleObserver<T> implements Observer<T> {
 
     @Override
     public void onSubscribe(Disposable d) {
-        Log.d("SimpleObserver", "onSubscribe: ");
     }
 
     @Override
     public void onNext(T t) {
-        Log.d("SimpleObserver", "onNext: ");
         onHandleSuccess(t);
     }
 
     @Override
     public void onError(Throwable e) {
-        Log.d("SimpleObserver", "onError: " + e.getMessage());
         onHandleError(e, NetUtils.isAvailable());
     }
 
     @Override
     public void onComplete() {
-        Log.d("SimpleObserver", "onComplete: ");
     }
 
     /**

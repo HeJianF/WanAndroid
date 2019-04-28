@@ -12,13 +12,13 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
-        <com.hjf.wanandroid.vh.home.banner.SupperBannerView
+        <com.hjf.wanandroid.vh.home.banner.LoopView
             android:id="@+id/sbv_home_banner"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:clipToPadding="false">
 
-        </com.hjf.wanandroid.vh.home.banner.SupperBannerView>
+        </com.hjf.wanandroid.vh.home.banner.LoopView>
 
     </com.hjf.wanandroid.base.widget.RatioFrameLayout>
 

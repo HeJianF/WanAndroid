@@ -6,12 +6,12 @@ import com.hjf.wanandroid.R;
 
 /**
  * @author heJianfeng
- * @date 2019/4/1
+ * @date 2019-04-28
  */
-public class LoadingViewHolder extends BaseViewHolder {
+public class DividerHolder extends BaseViewHolder<Object> {
 
-    public LoadingViewHolder(ViewGroup parent) {
-        super(R.layout.layout_loading, parent);
+    public DividerHolder(ViewGroup parent) {
+        super(R.layout.holder_divider, parent);
     }
 
     @Override

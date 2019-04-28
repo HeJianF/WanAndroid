@@ -2,4 +2,6 @@
 <resources>
     <dimen name="layout_marginLeft">12dp</dimen>
     <dimen name="layout_marginRight">12dp</dimen>
+
+    <dimen name="feed_divider_height_10">10dp</dimen>
 </resources>

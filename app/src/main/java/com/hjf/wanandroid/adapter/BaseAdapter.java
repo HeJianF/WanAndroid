@@ -71,14 +71,14 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
             return;
         }
         if (baseViewHolder instanceof ErrorViewHolder) {
-            ((ErrorViewHolder) baseViewHolder).bind(mErrorString);
+            ((ErrorViewHolder) baseViewHolder).bind(mErrorString, i);
             return;
         }
         onBindViewHolderInner(baseViewHolder, i);
     }
 
     protected void onBindViewHolderInner(@NonNull BaseViewHolder baseViewHolder, int i) {
-        baseViewHolder.bind(getItemInfo(i));
+        baseViewHolder.bind(getItemInfo(i), i);
     }
 
     private E getItemInfo(int position) {

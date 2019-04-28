@@ -3,9 +3,9 @@ package com.hjf.wanandroid.adapter;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hjf.wanandroid.been.WanAndroidInfo;
-import com.hjf.wanandroid.utils.Constant;
+import com.hjf.wanandroid.been.CommonItem;
 import com.hjf.wanandroid.vh.BaseViewHolder;
+import com.hjf.wanandroid.vh.DividerHolder;
 import com.hjf.wanandroid.vh.home.ArticleVH;
 import com.hjf.wanandroid.vh.home.BannerVH;
 
@@ -16,7 +16,10 @@ import androidx.annotation.NonNull;
  * @email hjfstory@foxmail.com
  * @date 2019-04-27
  */
-public class HomeAdapter extends BaseAdapter<WanAndroidInfo> {
+public class HomeAdapter extends BaseAdapter<CommonItem> {
+
+    public static final int HOME_ARTICLE = 0;
+    public static final int HOME_BANNER = 1;
 
     private View.OnClickListener listener;
 
@@ -27,33 +30,32 @@ public class HomeAdapter extends BaseAdapter<WanAndroidInfo> {
     }
 
     @Override
-    protected BaseViewHolder<WanAndroidInfo> onCreateViewHolderInner(ViewGroup parent, int viewType) {
+    protected BaseViewHolder<CommonItem> onCreateViewHolderInner(ViewGroup parent, int viewType) {
+        BaseViewHolder holder;
         switch (viewType) {
-            case Constant.HOME_ARTICLE:
-                return new ArticleVH(parent, listener);
-            case Constant.HOME_BANNER:
-                BannerVH bannerVH = new BannerVH(parent, listener);
-                bannerVH.setLoopVpViewHeight(2.5F);
-                return bannerVH;
+            case HOME_ARTICLE:
+                holder = new ArticleVH(parent, listener);
+                break;
+            case HOME_BANNER:
+                holder = new BannerVH(parent, listener);
+                ((BannerVH) holder).setLoopVpViewHeight(2.5F);
+                break;
             default:
-                return null;
+                holder = new DividerHolder(parent);
         }
+        return holder;
     }
 
     @Override
     protected int getItemViewTypeInner(int position) {
         if (position >= 0 && position < mList.size()) {
-            return mList.get(position).getType();
+            return mList.get(position).type;
         }
         return super.getItemViewTypeInner(position);
     }
 
     @Override
     protected void onBindViewHolderInner(@NonNull BaseViewHolder baseViewHolder, int i) {
-        if (baseViewHolder instanceof ArticleVH) {
-            ArticleVH articleVH = (ArticleVH) baseViewHolder;
-            articleVH.bind(mList.get(i));
-        }
-        super.onBindViewHolderInner(baseViewHolder, i);
+        baseViewHolder.bind(mList.get(i).object, i);
     }
 }

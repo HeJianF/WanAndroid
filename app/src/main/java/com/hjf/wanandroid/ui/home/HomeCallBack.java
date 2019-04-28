@@ -1,7 +1,7 @@
 package com.hjf.wanandroid.ui.home;
 
 import com.hjf.wanandroid.base.mvp.MvpView;
-import com.hjf.wanandroid.been.WanAndroidInfo;
+import com.hjf.wanandroid.been.CommonItem;
 
 import java.util.List;
 
@@ -12,7 +12,7 @@ import java.util.List;
  */
 public interface HomeCallBack extends MvpView {
 
-    void showContent(List<WanAndroidInfo> data);
+    void showContent(List<CommonItem> data);
 
     void showErrorPage(String message);
 

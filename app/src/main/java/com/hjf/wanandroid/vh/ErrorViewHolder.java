@@ -24,7 +24,7 @@ public class ErrorViewHolder extends BaseViewHolder<String> {
     }
 
     @Override
-    public void bind(String data) {
+    public void bind(String data, int position) {
         errorText.setText(TextUtils.isEmpty(data) ? "点击屏幕，重新加载" : data);
     }
 

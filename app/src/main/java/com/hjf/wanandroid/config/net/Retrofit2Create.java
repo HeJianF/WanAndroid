@@ -1,4 +1,4 @@
-package com.hjf.wanandroid.net;
+package com.hjf.wanandroid.config.net;
 
 import java.util.concurrent.TimeUnit;
 
@@ -17,7 +17,7 @@ public enum Retrofit2Create {
     /**
      * wanAndroid
      */
-    WAN_ANDEOID();
+    WAN_ANDROID();
 
     private final Retrofit retrofit;
 

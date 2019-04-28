@@ -13,6 +13,9 @@ import com.hjf.wanandroid.app.WanApplication;
  */
 public class ToastUtils {
 
+    private ToastUtils() {
+    }
+
     private static Handler handler = new Handler(Looper.getMainLooper());
     private static Toast toast;
 

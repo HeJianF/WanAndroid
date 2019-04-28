@@ -13,6 +13,9 @@ import com.hjf.wanandroid.app.WanApplication;
  */
 public class UiUtils {
 
+    private UiUtils() {
+    }
+
     public static Context getContext() {
         return WanApplication.getContext();
     }

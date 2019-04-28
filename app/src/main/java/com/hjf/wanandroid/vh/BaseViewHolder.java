@@ -7,6 +7,7 @@ import android.view.ViewGroup;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
 import butterknife.ButterKnife;
 
 /**
@@ -32,7 +33,7 @@ public abstract class BaseViewHolder<E> extends RecyclerView.ViewHolder {
 
     public BaseViewHolder(@LayoutRes int layoutId, ViewGroup parent, View.OnClickListener listener,
                           boolean allClick) {
-            super(LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false));
+        super(LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false));
         //注册ButterKnife
         ButterKnife.bind(this, itemView);
         if (listener != null) {
@@ -48,6 +49,6 @@ public abstract class BaseViewHolder<E> extends RecyclerView.ViewHolder {
      *
      * @param data
      */
-    public abstract void bind(E data);
+    public abstract void bind(E data, int position);
 
 }

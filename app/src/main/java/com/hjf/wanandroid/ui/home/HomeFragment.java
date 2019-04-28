@@ -11,7 +11,7 @@ import com.hjf.wanandroid.R;
 import com.hjf.wanandroid.adapter.BaseAdapter;
 import com.hjf.wanandroid.adapter.HomeAdapter;
 import com.hjf.wanandroid.base.BaseFragment;
-import com.hjf.wanandroid.been.WanAndroidInfo;
+import com.hjf.wanandroid.been.CommonItem;
 import com.hjf.wanandroid.utils.ToastUtils;
 
 import java.util.List;
@@ -54,7 +54,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCal
     }
 
     @Override
-    public void showContent(List<WanAndroidInfo> data) {
+    public void showContent(List<CommonItem> data) {
         adapter.setmList(data);
     }
 

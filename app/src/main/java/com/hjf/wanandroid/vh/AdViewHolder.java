@@ -16,7 +16,7 @@ public class AdViewHolder extends BaseViewHolder {
     }
 
     @Override
-    public void bind(Object data) {
+    public void bind(Object data, int position) {
     }
 
 }

@@ -1,13 +1,14 @@
 package com.hjf.wanandroid.ui.home;
 
+import com.hjf.wanandroid.adapter.HomeAdapter;
 import com.hjf.wanandroid.base.mvp.BaseLifecyclePresenter;
 import com.hjf.wanandroid.base.mvp.rxlifecycle.PresenterEvent;
 import com.hjf.wanandroid.been.ArticleInfo;
-import com.hjf.wanandroid.been.WanAndroidInfo;
-import com.hjf.wanandroid.net.Retrofit2Create;
-import com.hjf.wanandroid.net.WanAndroidApi;
+import com.hjf.wanandroid.been.CommonItem;
+import com.hjf.wanandroid.config.net.api.ApiFactory;
+import com.hjf.wanandroid.config.net.api.HomeApi;
 import com.hjf.wanandroid.rx.SimpleObserver;
-import com.hjf.wanandroid.ui.home.HomeCallBack;
+import com.hjf.wanandroid.utils.CommonUtil;
 import com.hjf.wanandroid.utils.Constant;
 
 import java.util.ArrayList;
@@ -30,30 +31,37 @@ public class HomePresenter extends BaseLifecyclePresenter<HomeCallBack> {
     }
 
     public void loadData() {
-        WanAndroidApi wanAndroidApi = Retrofit2Create.WAN_ANDEOID.create(WanAndroidApi.class);
-        Observable.zip(wanAndroidApi.getBanner(), wanAndroidApi.getArticle(0), (bannerInfo, articleInfo) -> {
-            List<WanAndroidInfo> wanAndroidInfos = new ArrayList<>();
+        HomeApi homeApi = ApiFactory.getHomeApi();
+        Observable.zip(homeApi.getBanner(), homeApi.getArticle(0), (bannerInfo, articleInfo) -> {
+            List<CommonItem> list = new ArrayList<>();
+
             //Banner轮播图
-            if (Constant.ERROR_CODE_0 == bannerInfo.getErrorCode()) {
-                WanAndroidInfo banner = new WanAndroidInfo(Constant.HOME_BANNER, bannerInfo);
-                wanAndroidInfos.add(banner);
-            }
-            //文章列表
-            if (Constant.ERROR_CODE_0 == articleInfo.getErrorCode()) {
-                List<ArticleInfo.DataBean.DatasBean> datasBeanList = articleInfo.getData().getDatas();
-                for (ArticleInfo.DataBean.DatasBean datasBean : datasBeanList) {
-                    WanAndroidInfo article = new WanAndroidInfo(Constant.HOME_ARTICLE, datasBean);
-                    wanAndroidInfos.add(article);
+            if (bannerInfo != null && Constant.ERROR_CODE_0 == bannerInfo.getErrorCode()) {
+                if (CommonUtil.noEmpty(bannerInfo.getData())) {
+                    CommonItem banner = new CommonItem(HomeAdapter.HOME_BANNER, bannerInfo.getData());
+                    list.add(banner);
                 }
             }
-            return wanAndroidInfos;
+
+            //文章列表
+            if (articleInfo != null && Constant.ERROR_CODE_0 == articleInfo.getErrorCode()) {
+                if (CommonUtil.noEmpty(articleInfo.getData().getDatas())) {
+                    List<ArticleInfo.DataBean.DatasBean> datasBeanList = articleInfo.getData().getDatas();
+                    for (ArticleInfo.DataBean.DatasBean datasBean : datasBeanList) {
+                        CommonItem article = new CommonItem(HomeAdapter.HOME_ARTICLE, datasBean);
+                        list.add(article);
+                    }
+                }
+            }
+
+            return list;
         }).subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .compose(bindUntilEvent(PresenterEvent.DETACH))
-                .subscribe(new SimpleObserver<List<WanAndroidInfo>>() {
+                .subscribe(new SimpleObserver<List<CommonItem>>() {
                     @Override
-                    protected void onHandleSuccess(List<WanAndroidInfo> wanAndroidInfos) {
-                        getMvpView().showContent(wanAndroidInfos);
+                    protected void onHandleSuccess(List<CommonItem> commonItems) {
+                        getMvpView().showContent(commonItems);
                     }
 
                     @Override

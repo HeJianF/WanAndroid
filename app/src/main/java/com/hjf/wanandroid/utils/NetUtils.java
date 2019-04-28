@@ -20,8 +20,7 @@ public class NetUtils {
      */
     public static boolean isAvailable() {
         try {
-            Context context = WanApplication.getContext();
-            ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+            ConnectivityManager manager = (ConnectivityManager) WanApplication.getContext().getSystemService(Context.CONNECTIVITY_SERVICE);
             NetworkInfo info = manager.getActiveNetworkInfo();
             return !(info == null || !info.isAvailable());
         } catch (Exception e) {

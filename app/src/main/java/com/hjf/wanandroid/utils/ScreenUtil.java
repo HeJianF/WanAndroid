@@ -6,6 +6,9 @@ package com.hjf.wanandroid.utils;
  */
 public class ScreenUtil {
 
+    private ScreenUtil() {
+    }
+
     /**
      * 获得屏幕宽度
      */

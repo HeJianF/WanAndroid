@@ -1,4 +1,4 @@
-package com.hjf.wanandroid.net;
+package com.hjf.wanandroid.config.net.api;
 
 import com.hjf.wanandroid.been.ArticleInfo;
 import com.hjf.wanandroid.been.BannerInfo;
@@ -12,7 +12,7 @@ import retrofit2.http.Path;
  * @email hjfstory@foxmail.com
  * @date 2019-04-27
  */
-public interface WanAndroidApi {
+public interface HomeApi {
 
     @GET("/article/list/{page}/json")
     Observable<ArticleInfo> getArticle(@Path("page") int page);

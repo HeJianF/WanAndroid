@@ -6,7 +6,6 @@ import android.widget.TextView;
 
 import com.hjf.wanandroid.R;
 import com.hjf.wanandroid.been.ArticleInfo;
-import com.hjf.wanandroid.been.WanAndroidInfo;
 import com.hjf.wanandroid.vh.BaseViewHolder;
 
 import butterknife.BindView;
@@ -16,7 +15,7 @@ import butterknife.BindView;
  * @email hjfstory@foxmail.com
  * @date 2019-04-27
  */
-public class ArticleVH extends BaseViewHolder<WanAndroidInfo> {
+public class ArticleVH extends BaseViewHolder<ArticleInfo.DataBean.DatasBean> {
 
     @BindView(R.id.article_title)
     TextView article_title;
@@ -30,13 +29,9 @@ public class ArticleVH extends BaseViewHolder<WanAndroidInfo> {
     }
 
     @Override
-    public void bind(WanAndroidInfo data) {
-        Object object = data.getObject();
-        if (object instanceof ArticleInfo.DataBean.DatasBean) {
-            ArticleInfo.DataBean.DatasBean datasBean = (ArticleInfo.DataBean.DatasBean) object;
-            article_title.setText(datasBean.getTitle());
-            article_author.setText(datasBean.getAuthor());
-            article_nice_date.setText(datasBean.getNiceDate());
-        }
+    public void bind(ArticleInfo.DataBean.DatasBean data, int position) {
+        article_title.setText(data.getTitle());
+        article_author.setText(data.getAuthor());
+        article_nice_date.setText(data.getNiceDate());
     }
 }
