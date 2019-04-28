@@ -4,8 +4,10 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hjf.wanandroid.R;
+import com.hjf.wanandroid.base.widget.RatioFrameLayout;
 import com.hjf.wanandroid.been.BannerInfo;
 import com.hjf.wanandroid.been.WanAndroidInfo;
+import com.hjf.wanandroid.utils.ScreenUtil;
 import com.hjf.wanandroid.vh.BaseViewHolder;
 import com.hjf.wanandroid.vh.home.banner.SupperBannerView;
 
@@ -18,6 +20,8 @@ import butterknife.BindView;
  */
 public class BannerVH extends BaseViewHolder<WanAndroidInfo> {
 
+    @BindView(R.id.loop_container)
+    RatioFrameLayout loop_container;
     @BindView(R.id.sbv_home_banner)
     SupperBannerView sbv_home_banner;
 
@@ -33,4 +37,13 @@ public class BannerVH extends BaseViewHolder<WanAndroidInfo> {
             sbv_home_banner.setData(dataBean.getData());
         }
     }
+
+    public void setLoopVpViewHeight(float whPercent) {
+        if (itemView == null || whPercent == 0) return;
+        ViewGroup.LayoutParams params = loop_container.getLayoutParams();
+        params.width = ScreenUtil.getScreenWidth() - itemView.getPaddingLeft() - itemView.getPaddingRight();
+        params.height = (int) (params.width / whPercent);
+        loop_container.setLayoutParams(params);
+    }
+
 }

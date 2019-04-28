@@ -26,6 +26,10 @@ public class HomePresenter extends BaseLifecyclePresenter<HomeCallBack> {
 
     @Override
     public void start() {
+        loadData();
+    }
+
+    public void loadData() {
         WanAndroidApi wanAndroidApi = Retrofit2Create.WAN_ANDEOID.create(WanAndroidApi.class);
         Observable.zip(wanAndroidApi.getBanner(), wanAndroidApi.getArticle(0), (bannerInfo, articleInfo) -> {
             List<WanAndroidInfo> wanAndroidInfos = new ArrayList<>();

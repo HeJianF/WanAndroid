@@ -14,13 +14,15 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.hjf.wanandroid.R;
+import com.hjf.wanandroid.adapter.BaseAdapter;
 import com.hjf.wanandroid.adapter.HomeAdapter;
 import com.hjf.wanandroid.base.BaseFragment;
 import com.hjf.wanandroid.been.WanAndroidInfo;
+import com.hjf.wanandroid.utils.ToastUtils;
 
 import java.util.List;
 
-public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCallBack, View.OnClickListener {
+public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCallBack, View.OnClickListener, BaseAdapter.OnAdapterErrorListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -76,6 +78,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCal
         recyclerView = view.findViewById(R.id.recycle_view);
         recyclerView.setLayoutManager(new LinearLayoutManager(mActivity));
         adapter = new HomeAdapter(this);
+        adapter.setErrorListener(this);
         recyclerView.setAdapter(adapter);
         return view;
     }
@@ -110,4 +113,9 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCal
     public void showEmptyPage(String emptyInfo) {
     }
 
+    @Override
+    public void onRetryListener() {
+        ToastUtils.showToast("重新加载中...");
+        mPresenter.loadData();
+    }
 }

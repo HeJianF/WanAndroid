@@ -9,4 +9,15 @@
         <attr name="showDuration" format="integer" />
         <attr name="onPageScroll" format="boolean" />
     </declare-styleable>
+
+    <!-- View宽高比 -->
+    <declare-styleable name="RatioByWidthView">
+        <attr name="ratio" format="float" />
+        <attr name="multiplyRatio" format="float" />
+
+        <attr name="imageType">
+            <enum name="origin" value="0" />
+            <enum name="big" value="1" />
+        </attr>
+    </declare-styleable>
 </resources>

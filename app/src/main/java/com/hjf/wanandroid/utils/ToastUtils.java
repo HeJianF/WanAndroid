@@ -20,7 +20,7 @@ public class ToastUtils {
     public static void showToast(String message) {
         handler.post(() -> {
             if (toast == null) {
-                toast = Toast.makeText(WanApplication.getApplication(), null, Toast.LENGTH_SHORT);
+                toast = Toast.makeText(WanApplication.getContext(), null, Toast.LENGTH_SHORT);
             }
             toast.setText(message);
             toast.show();

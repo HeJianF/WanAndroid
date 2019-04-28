@@ -32,7 +32,9 @@ public class HomeAdapter extends BaseAdapter<WanAndroidInfo> {
             case Constant.HOME_ARTICLE:
                 return new ArticleVH(parent, listener);
             case Constant.HOME_BANNER:
-                return new BannerVH(parent, listener);
+                BannerVH bannerVH = new BannerVH(parent, listener);
+                bannerVH.setLoopVpViewHeight(2.5F);
+                return bannerVH;
             default:
                 return null;
         }

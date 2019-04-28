@@ -17,7 +17,7 @@ public class WanApplication extends Application {
         application = getApplicationContext();
     }
 
-    public static Context getApplication() {
+    public static Context getContext() {
         return application;
     }
 }
