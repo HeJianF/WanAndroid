@@ -37,7 +37,7 @@ public class HomeFragment extends BaseFragment<HomePresenter> implements HomeCal
     @Override
     protected void initOnCreateView() {
         recycle_view.setLayoutManager(new LinearLayoutManager(mContext));
-        adapter = new HomeAdapter(this);
+        adapter = new HomeAdapter(getContext(), this);
         adapter.setErrorListener(this);
         recycle_view.setAdapter(adapter);
     }

@@ -8,4 +8,7 @@
     <color name="C_000000">#000000</color>
     <color name="C_000000_80">#33000000</color>
     <color name="C_F7F7F7">#F7F7F7</color>
+    <color name="c_cccccc">#cccccc</color>
+    <color name="c_969FA9">#FF969FA9</color>
+    <color name="c_F0F0F0">#F0F0F0</color>
 </resources>

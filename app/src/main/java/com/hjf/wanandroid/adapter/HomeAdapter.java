@@ -1,5 +1,6 @@
 package com.hjf.wanandroid.adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -23,8 +24,8 @@ public class HomeAdapter extends BaseAdapter<CommonItem> {
 
     private View.OnClickListener listener;
 
-    public HomeAdapter(View.OnClickListener listener) {
-        super();
+    public HomeAdapter(Context context, View.OnClickListener listener) {
+        super(context);
         this.listener = listener;
         onShowLoading();
     }
@@ -33,12 +34,12 @@ public class HomeAdapter extends BaseAdapter<CommonItem> {
     protected BaseViewHolder<CommonItem> onCreateViewHolderInner(ViewGroup parent, int viewType) {
         BaseViewHolder holder;
         switch (viewType) {
-            case HOME_ARTICLE:
-                holder = new ArticleVH(parent, listener);
-                break;
             case HOME_BANNER:
                 holder = new BannerVH(parent, listener);
                 ((BannerVH) holder).setLoopVpViewHeight(2.5F);
+                break;
+            case HOME_ARTICLE:
+                holder = new ArticleVH(parent, listener);
                 break;
             default:
                 holder = new DividerHolder(parent);

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/fl_container"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="center">
+
+    <!--加载更多-->
+    <FrameLayout
+        android:id="@+id/rl_loading"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <ProgressBar
+            style="@style/FootProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp" />
+
+
+        <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:ellipsize="end"-->
+        <!--android:gravity="center"-->
+        <!--android:padding="5dp"-->
+        <!--android:singleLine="true"-->
+        <!--android:text="加载更多"-->
+        <!--android:textColor="#ff717171"-->
+        <!--android:textSize="14sp"-->
+        <!--/>-->
+    </FrameLayout>
+
+    <!--网络错误-->
+    <LinearLayout
+        android:id="@+id/rl_error"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@android:color/transparent"
+        android:gravity="center"
+        android:visibility="invisible"
+        tools:visibility="visible">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:ellipsize="end"
+            android:gravity="center"
+            android:padding="5dp"
+            android:singleLine="true"
+            android:text="@string/error_view_net"
+            android:textColor="@color/c_cccccc"
+            android:textSize="12sp"
+            tools:ignore="Deprecated" />
+    </LinearLayout>
+
+
+    <!--没有更多-->
+    <LinearLayout
+        android:id="@+id/rl_no_more"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginBottom="24dp"
+        android:layout_marginTop="24dp"
+        android:gravity="center"
+        android:orientation="horizontal"
+        android:visibility="visible">
+
+        <ImageView
+            android:id="@+id/img_loadmore_line1"
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:layout_marginEnd="5dp"
+            android:layout_marginRight="5dp"
+            android:background="@color/c_F0F0F0" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/loading_view_no_more"
+            android:textColor="@color/c_969FA9"
+            android:textSize="12sp" />
+
+        <ImageView
+            android:id="@+id/img_loadmore_line2"
+            android:layout_width="30dp"
+            android:layout_height="1dp"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:background="@color/c_F0F0F0" />
+    </LinearLayout>
+
+</FrameLayout>

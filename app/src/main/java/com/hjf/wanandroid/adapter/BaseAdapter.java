@@ -1,11 +1,15 @@
 package com.hjf.wanandroid.adapter;
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 
 import com.hjf.wanandroid.R;
+import com.hjf.wanandroid.utils.CommonUtil;
 import com.hjf.wanandroid.vh.BaseViewHolder;
 import com.hjf.wanandroid.vh.ErrorViewHolder;
+import com.hjf.wanandroid.vh.FooterViewHolder;
 import com.hjf.wanandroid.vh.LoadingViewHolder;
 
 import java.util.ArrayList;
@@ -21,15 +25,19 @@ import androidx.recyclerview.widget.RecyclerView;
  */
 public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder> {
 
+    protected static final int TYPE_FOOTER = -1;
     protected static final int TYPE_ERROR = -3; //错误
     protected static final int TYPE_LOADING = -4;//正在加载
-    protected boolean isError;
-    protected boolean isLoading;
+    public boolean isError;
+    public boolean isLoading;
     protected String mErrorString = "";
-
+    protected Context mContext;
+    public static int MIN_COUNT_SHOW_FOOTER = 10;
+    protected FooterViewHolder mFooterViewHolder;
     List<E> mList = new ArrayList<>();
 
-    public BaseAdapter() {
+    public BaseAdapter(Context context) {
+        this.mContext = context;
         isError = false;
         isLoading = false;
     }
@@ -58,6 +66,8 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
                 return new LoadingViewHolder(viewGroup);
             case TYPE_ERROR:
                 return new ErrorViewHolder(viewGroup, onClickListener);
+            case TYPE_FOOTER:
+                return getFooterHolder();
             default:
         }
         return onCreateViewHolderInner(viewGroup, i);
@@ -71,7 +81,10 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
             return;
         }
         if (baseViewHolder instanceof ErrorViewHolder) {
-            ((ErrorViewHolder) baseViewHolder).bind(mErrorString, i);
+            baseViewHolder.bind(mErrorString, i);
+            return;
+        }
+        if (baseViewHolder instanceof FooterViewHolder) {
             return;
         }
         onBindViewHolderInner(baseViewHolder, i);
@@ -93,6 +106,16 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
         if (isError || isLoading) {
             return 1;
         }
+
+        if (CommonUtil.isEmpty(mList)) {
+            return 0;
+        }
+
+        //添加FooterViewHolder
+        int size = mList.size();
+        if (size > MIN_COUNT_SHOW_FOOTER) {
+            return size + 1;
+        }
         return mList.size();
     }
 
@@ -104,11 +127,23 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
         if (isError) {
             return TYPE_ERROR;
         }
+        if (mList != null && mList.size() > MIN_COUNT_SHOW_FOOTER && position == mList.size()) {
+            return TYPE_FOOTER;
+        }
         return getItemViewTypeInner(position);
     }
 
     protected int getItemViewTypeInner(int position) {
         return 0;
+    }
+
+    public FooterViewHolder getFooterHolder() {
+        if (mFooterViewHolder == null) {
+            mFooterViewHolder = new FooterViewHolder(mContext, onClickListener);
+            FrameLayout footerView = mFooterViewHolder.getRootView();
+            footerView.setLayoutParams(new RecyclerView.LayoutParams(RecyclerView.LayoutParams.MATCH_PARENT, RecyclerView.LayoutParams.WRAP_CONTENT));
+        }
+        return mFooterViewHolder;
     }
 
     public void onShowError(String errorStirng) {
