@@ -1,6 +1,7 @@
 package com.hjf.wanandroid.base.list.fragment;
 
 import android.os.Bundle;
+import android.text.TextUtils;
 
 import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -10,6 +11,7 @@ import com.hjf.wanandroid.R;
 import com.hjf.wanandroid.adapter.BaseAdapter;
 import com.hjf.wanandroid.base.BaseFragment;
 import com.hjf.wanandroid.utils.CommonUtil;
+import com.hjf.wanandroid.utils.Constant;
 import com.hjf.wanandroid.vh.FooterViewHolder;
 
 import java.util.List;
@@ -93,6 +95,10 @@ public abstract class BaseListFragment<E, P extends BaseListPresenter> extends B
 
     @Override
     public void showEmptyPage(String emptyInfo) {
-
+        if (mAdapter == null) {
+            return;
+        }
+        mAdapter.onShowEmpty(TextUtils.isEmpty(emptyInfo) ? Constant.RESPONSE_EMPTY : emptyInfo);
+        mLoadingMoreScrollListener.loadingFinish();
     }
 }

@@ -16,4 +16,5 @@ public class Constant {
     public static final int ERROR_CODE_0 = 0;
     public static final int ERROR_CODE_1001 = -1001;
 
+    public static final String RESPONSE_EMPTY = "暂无数据";
 }

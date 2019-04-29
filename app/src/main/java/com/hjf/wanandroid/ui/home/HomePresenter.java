@@ -69,7 +69,11 @@ public class HomePresenter extends BaseListPresenter<List<CommonItem>> {
                 .subscribe(new SimpleObserver<List<CommonItem>>() {
                     @Override
                     protected void onHandleSuccess(List<CommonItem> commonItems) {
-                        getMvpView().showContent(commonItems, refresh);
+                        if (refresh && commonItems.isEmpty()) {
+                            getMvpView().showEmptyPage(Constant.RESPONSE_EMPTY);
+                        } else {
+                            getMvpView().showContent(commonItems, refresh);
+                        }
                     }
 
                     @Override

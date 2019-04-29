@@ -9,6 +9,7 @@ import com.hjf.wanandroid.R;
 import com.hjf.wanandroid.utils.CommonUtil;
 import com.hjf.wanandroid.utils.WanUtils;
 import com.hjf.wanandroid.vh.BaseViewHolder;
+import com.hjf.wanandroid.vh.EmptyViewHolder;
 import com.hjf.wanandroid.vh.ErrorViewHolder;
 import com.hjf.wanandroid.vh.FooterViewHolder;
 import com.hjf.wanandroid.vh.LoadingViewHolder;
@@ -26,11 +27,14 @@ import androidx.recyclerview.widget.RecyclerView;
 public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder> {
 
     protected static final int TYPE_FOOTER = -1;
+    protected static final int TYPE_EMPTY = -2; //空页面
     protected static final int TYPE_ERROR = -3; //错误
     protected static final int TYPE_LOADING = -4;//正在加载
+    protected boolean isEmpty;
     public boolean isError;
     public boolean isLoading;
     protected String mErrorString = "";
+    protected String mEmptyString = "";
     protected Context mContext;
     public static int MIN_COUNT_SHOW_FOOTER = 10;
     protected FooterViewHolder mFooterViewHolder;
@@ -38,6 +42,7 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
 
     public BaseAdapter(Context context) {
         this.mContext = context;
+        isEmpty = false;
         isError = false;
         isLoading = false;
     }
@@ -51,6 +56,7 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
         if (list == null) {
             list = new ArrayList<>();
         }
+        isEmpty = false;
         isError = false;
         isLoading = false;
         clear();
@@ -74,6 +80,8 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
                 return new LoadingViewHolder(viewGroup);
             case TYPE_ERROR:
                 return new ErrorViewHolder(viewGroup, onClickListener);
+            case TYPE_EMPTY:
+                return new EmptyViewHolder(viewGroup);
             case TYPE_FOOTER:
                 return getFooterHolder();
             default:
@@ -90,6 +98,10 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
         }
         if (baseViewHolder instanceof ErrorViewHolder) {
             baseViewHolder.bind(mErrorString, i);
+            return;
+        }
+        if (baseViewHolder instanceof EmptyViewHolder) {
+            baseViewHolder.bind(mEmptyString, i);
             return;
         }
         if (baseViewHolder instanceof FooterViewHolder) {
@@ -111,7 +123,7 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
 
     @Override
     public int getItemCount() {
-        if (isError || isLoading) {
+        if (isError || isLoading || isEmpty) {
             return 1;
         }
 
@@ -135,6 +147,9 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
         if (isError) {
             return TYPE_ERROR;
         }
+        if (isEmpty) {
+            return TYPE_EMPTY;
+        }
         if (mList != null && mList.size() > MIN_COUNT_SHOW_FOOTER && position == mList.size()) {
             return TYPE_FOOTER;
         }
@@ -157,6 +172,7 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
     public void onShowError(String errorStirng) {
         clear();
         isError = true;
+        isEmpty = false;
         isLoading = false;
         this.mErrorString = errorStirng;
         notifyDataSetChanged();
@@ -164,8 +180,18 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
 
     public void onShowLoading() {
         clear();
-        isError = false;
         isLoading = true;
+        isEmpty = false;
+        isError = false;
+        notifyDataSetChanged();
+    }
+
+    public void onShowEmpty(String emptyInfo) {
+        clear();
+        isEmpty = true;
+        isError = false;
+        isLoading = false;
+        mEmptyString = emptyInfo;
         notifyDataSetChanged();
     }
 
