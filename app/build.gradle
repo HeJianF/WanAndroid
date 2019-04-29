@@ -27,6 +27,7 @@ dependencies {
     def majorFrame = rootProject.ext.majorFrame
     //ButterKnife
     implementation majorFrame.ButterKnife
+    implementation 'com.google.android.material:material:1.0.0'
     annotationProcessor majorFrame.aptButterKnifeCompiler
 
     implementation fileTree(dir: 'libs', include: ['*.jar'])
