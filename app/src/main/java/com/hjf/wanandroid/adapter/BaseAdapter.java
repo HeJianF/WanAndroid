@@ -7,6 +7,7 @@ import android.widget.FrameLayout;
 
 import com.hjf.wanandroid.R;
 import com.hjf.wanandroid.utils.CommonUtil;
+import com.hjf.wanandroid.utils.WanUtils;
 import com.hjf.wanandroid.vh.BaseViewHolder;
 import com.hjf.wanandroid.vh.ErrorViewHolder;
 import com.hjf.wanandroid.vh.FooterViewHolder;
@@ -17,7 +18,6 @@ import java.util.List;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 
 /**
  * @author heJianfeng
@@ -56,6 +56,14 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
         clear();
         mList.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public void addList(List<E> list) {
+        if (CommonUtil.isEmpty(list)) {
+            return;
+        }
+        notifyItemRangeInserted(mList.size(), list.size());
+        mList.addAll(list);
     }
 
     @NonNull
@@ -161,6 +169,10 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
         notifyDataSetChanged();
     }
 
+    public void bindFooter(int state) {
+        getFooterHolder().bind(state, -1);
+    }
+
     public void clear() {
         mList.clear();
     }
@@ -174,9 +186,13 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
     private View.OnClickListener onClickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
+            if (WanUtils.isFastDoubleClick() || errorListener == null) return;
             switch (v.getId()) {
                 case R.id.fl_error:
                     errorListener.onRetryListener();
+                    break;
+                case R.id.rl_error:
+                    errorListener.onFooterRetryListener();
                     break;
                 default:
             }
@@ -185,6 +201,14 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
 
     public interface OnAdapterErrorListener {
         void onRetryListener();
+
+        /**
+         * 部分界面不需要加载更多逻辑
+         * 所以提供空方法
+         */
+        default void onFooterRetryListener() {
+
+        }
     }
 
 }

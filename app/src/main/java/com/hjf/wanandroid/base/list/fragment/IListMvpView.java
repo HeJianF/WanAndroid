@@ -10,10 +10,10 @@ import java.util.List;
  */
 public interface IListMvpView<C extends List> extends MvpView {
 
-    void showContent(List<C> data);
+    void showContent(C data, boolean refresh);
 
     void showErrorPage(String message, boolean refresh);
 
-    void showEmptyPage(String emptyInfo, boolean refresh);
+    void showEmptyPage(String emptyInfo);
 
 }

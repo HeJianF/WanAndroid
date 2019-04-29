@@ -1,44 +1,98 @@
 package com.hjf.wanandroid.base.list.fragment;
 
+import android.os.Bundle;
+
+import androidx.annotation.Nullable;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.hjf.wanandroid.R;
+import com.hjf.wanandroid.adapter.BaseAdapter;
 import com.hjf.wanandroid.base.BaseFragment;
-import com.hjf.wanandroid.base.mvp.BasePresenter;
+import com.hjf.wanandroid.utils.CommonUtil;
+import com.hjf.wanandroid.vh.FooterViewHolder;
 
 import java.util.List;
+
+import butterknife.BindView;
 
 /**
  * @author Jianfeng He
  * @email hjfstory@foxmail.com
  * @date 2019-04-27
  */
-public abstract class BaseListFragment<P extends LoadingMoreScrollListenerM> extends BaseFragment implements IListMvpView {
+public abstract class BaseListFragment<E, P extends BaseListPresenter> extends BaseFragment implements IListMvpView<List<E>>, BaseAdapter.OnAdapterErrorListener {
+
+    @BindView(R.id.recycle_view)
+    RecyclerView recycle_view;
+    protected P mPresenter;
+    protected BaseAdapter<E> mAdapter;
+    protected LoadingMoreScrollListenerM mLoadingMoreScrollListener;
+
+    public abstract P providePresenter();
+
+    protected abstract BaseAdapter<E> provideAdapter();
 
     @Override
-    public BasePresenter providePresenter() {
-        return null;
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        mPresenter = providePresenter();
+        mPresenter.attachView(this);
+    }
+
+    @Override
+    public void onDestroyView() {
+        if (mAdapter != null) {
+            recycle_view.setAdapter(null);
+        }
+        super.onDestroyView();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
     }
 
     @Override
     public int provideLayoutId() {
-        return 0;
+        return R.layout.item_list;
     }
 
     @Override
     protected void initOnCreateView() {
-
+        mAdapter = provideAdapter();
+        mAdapter.setErrorListener(this);
+        recycle_view.setLayoutManager(new LinearLayoutManager(mContext));
+        mLoadingMoreScrollListener = new LoadingMoreScrollListenerM(mPresenter);
+        recycle_view.addOnScrollListener(mLoadingMoreScrollListener);
+        recycle_view.setAdapter(mAdapter);
+        mPresenter.start();
     }
 
     @Override
-    public void showContent(List data) {
-
+    public void showContent(List<E> data, boolean refresh) {
+        if (refresh) {
+            mAdapter.setmList(data);
+        } else {
+            mAdapter.addList(data);
+        }
+        mAdapter.bindFooter(CommonUtil.isEmpty(data) ? FooterViewHolder.NO_MORE : FooterViewHolder.HAS_MORE);
+        mLoadingMoreScrollListener.loadingFinish();
     }
 
     @Override
     public void showErrorPage(String message, boolean refresh) {
-
+        if (mAdapter == null) {
+            return;
+        }
+        if (refresh) {
+            mAdapter.onShowError(message);
+        } else {
+            mAdapter.bindFooter(FooterViewHolder.ERROR);
+        }
+        mLoadingMoreScrollListener.loadingFinish();
     }
 
     @Override
-    public void showEmptyPage(String emptyInfo, boolean refresh) {
+    public void showEmptyPage(String emptyInfo) {
 
     }
 }

@@ -8,7 +8,7 @@ import androidx.annotation.CallSuper;
  * @author heJianfeng
  * @date 2019/3/24
  */
-public class BasePresenter<V extends MvpView> {
+public class MvpPresenter<V extends MvpView> {
 
     private V mMvpView;
 

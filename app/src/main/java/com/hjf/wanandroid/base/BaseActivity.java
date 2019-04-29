@@ -3,7 +3,7 @@ package com.hjf.wanandroid.base;
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 
-import com.hjf.wanandroid.base.mvp.BaseLifecyclePresenter;
+import com.hjf.wanandroid.base.mvp.MvpLifecyclePresenter;
 import com.hjf.wanandroid.base.mvp.MvpView;
 import com.trello.rxlifecycle3.components.support.RxAppCompatActivity;
 
@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
  * @date 2019/3/24
  */
 @SuppressLint("Registered")
-public abstract class BaseActivity<P extends BaseLifecyclePresenter> extends RxAppCompatActivity implements MvpView {
+public abstract class BaseActivity<P extends MvpLifecyclePresenter> extends RxAppCompatActivity implements MvpView {
 
     protected P mPresenter;
 

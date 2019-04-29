@@ -19,8 +19,8 @@ import androidx.annotation.NonNull;
  */
 public class HomeAdapter extends BaseAdapter<CommonItem> {
 
-    public static final int HOME_ARTICLE = 0;
-    public static final int HOME_BANNER = 1;
+    public static final int ITEM_TYPE_ARTICLE = 0;
+    public static final int ITEM_TYPE_BANNER = 1;
 
     private View.OnClickListener listener;
 
@@ -34,11 +34,11 @@ public class HomeAdapter extends BaseAdapter<CommonItem> {
     protected BaseViewHolder<CommonItem> onCreateViewHolderInner(ViewGroup parent, int viewType) {
         BaseViewHolder holder;
         switch (viewType) {
-            case HOME_BANNER:
+            case ITEM_TYPE_BANNER:
                 holder = new BannerVH(parent, listener);
                 ((BannerVH) holder).setLoopVpViewHeight(2.5F);
                 break;
-            case HOME_ARTICLE:
+            case ITEM_TYPE_ARTICLE:
                 holder = new ArticleVH(parent, listener);
                 break;
             default:

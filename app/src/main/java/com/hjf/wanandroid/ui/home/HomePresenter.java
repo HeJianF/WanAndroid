@@ -1,9 +1,10 @@
 package com.hjf.wanandroid.ui.home;
 
 import com.hjf.wanandroid.adapter.HomeAdapter;
-import com.hjf.wanandroid.base.mvp.BaseLifecyclePresenter;
+import com.hjf.wanandroid.base.list.fragment.BaseListPresenter;
 import com.hjf.wanandroid.base.mvp.rxlifecycle.PresenterEvent;
 import com.hjf.wanandroid.been.ArticleInfo;
+import com.hjf.wanandroid.been.BannerInfo;
 import com.hjf.wanandroid.been.CommonItem;
 import com.hjf.wanandroid.config.net.api.ApiFactory;
 import com.hjf.wanandroid.config.net.api.HomeApi;
@@ -19,26 +20,31 @@ import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.schedulers.Schedulers;
 
 /**
- * @author Jianfeng He
- * @email hjfstory@foxmail.com
- * @date 2019-04-27
+ * @author heJianfeng
+ * @date 2019-04-29
  */
-public class HomePresenter extends BaseLifecyclePresenter<HomeCallBack> {
+public class HomePresenter extends BaseListPresenter<List<CommonItem>> {
 
     @Override
     public void start() {
-        loadData();
+        loadData(true);
     }
 
-    public void loadData() {
-        HomeApi homeApi = ApiFactory.getHomeApi();
-        Observable.zip(homeApi.getBanner(), homeApi.getArticle(0), (bannerInfo, articleInfo) -> {
+    @Override
+    public void onLoadingMore() {
+        loadData(false);
+    }
+
+    private void loadData(boolean refresh) {
+        Observable<BannerInfo> bannerInfoObservable = refresh ? ApiFactory.getHomeApi().getBanner() : Observable.just(new BannerInfo());
+
+        Observable.zip(bannerInfoObservable, ApiFactory.getHomeApi().getArticle(requestPage), (bannerInfo, articleInfo) -> {
             List<CommonItem> list = new ArrayList<>();
 
             //Banner轮播图
             if (bannerInfo != null && Constant.ERROR_CODE_0 == bannerInfo.getErrorCode()) {
                 if (CommonUtil.noEmpty(bannerInfo.getData())) {
-                    CommonItem banner = new CommonItem(HomeAdapter.HOME_BANNER, bannerInfo.getData());
+                    CommonItem banner = new CommonItem(HomeAdapter.ITEM_TYPE_BANNER, bannerInfo.getData());
                     list.add(banner);
                 }
             }
@@ -48,10 +54,12 @@ public class HomePresenter extends BaseLifecyclePresenter<HomeCallBack> {
                 if (CommonUtil.noEmpty(articleInfo.getData().getDatas())) {
                     List<ArticleInfo.DataBean.DatasBean> datasBeanList = articleInfo.getData().getDatas();
                     for (ArticleInfo.DataBean.DatasBean datasBean : datasBeanList) {
-                        CommonItem article = new CommonItem(HomeAdapter.HOME_ARTICLE, datasBean);
+                        CommonItem article = new CommonItem(HomeAdapter.ITEM_TYPE_ARTICLE, datasBean);
                         list.add(article);
                     }
                 }
+                // 下次requestPage = 本次curPage;
+                requestPage = articleInfo.getData().getCurPage();
             }
 
             return list;
@@ -61,15 +69,15 @@ public class HomePresenter extends BaseLifecyclePresenter<HomeCallBack> {
                 .subscribe(new SimpleObserver<List<CommonItem>>() {
                     @Override
                     protected void onHandleSuccess(List<CommonItem> commonItems) {
-                        getMvpView().showContent(commonItems);
+                        getMvpView().showContent(commonItems, refresh);
                     }
 
                     @Override
                     protected void onHandleError(Throwable e, boolean netAvailable) {
                         if (netAvailable) {
-                            getMvpView().showErrorPage(e.getMessage());
+                            getMvpView().showErrorPage(e.getMessage(), refresh);
                         } else {
-                            getMvpView().showErrorPage("网络未连接     " + e.getMessage());
+                            getMvpView().showErrorPage("网络未连接     " + e.getMessage(), refresh);
                         }
                     }
                 });

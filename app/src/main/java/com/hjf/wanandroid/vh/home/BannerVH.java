@@ -8,7 +8,6 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 
-import com.bumptech.glide.Glide;
 import com.hjf.wanandroid.R;
 import com.hjf.wanandroid.app.WanApplication;
 import com.hjf.wanandroid.base.widget.RatioFrameLayout;
@@ -69,16 +68,13 @@ public class BannerVH extends BaseViewHolder<List<BannerInfo.DataBean>> implemen
     public void onBindItem(BannerVH.Holder holder, int position) {
         holder.title.setText(datas.get(position).getTitle());
         ImageLoaderUtils.instance().disImage(WanApplication.getContext(), datas.get(position).getImagePath(), holder.imageView);
+        holder.imageView.setTag(R.id.item_banner, datas.get(position).getUrl());
+        holder.imageView.setOnClickListener(mListener);
     }
 
     @Override
     public void changeListener(int position, float offset) {
 
-    }
-
-    @Override
-    public void itemClick(View view, int position) {
-        ToastUtils.showToast(datas.get(position).getUrl());
     }
 
     @Override

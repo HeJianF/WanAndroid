@@ -193,12 +193,6 @@ public class LoopView extends ViewPager {
             LoopHolder holder = items.poll();
             if (holder == null) {
                 holder = loopListener.onCreateItem(container, position);
-                holder.itemView.setOnClickListener(new OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        loopListener.itemClick(v, getCurrentItem() % loopSize);
-                    }
-                });
             }
             loopListener.onBindItem(holder, position);
             container.addView(holder.itemView);
@@ -282,8 +276,6 @@ public class LoopView extends ViewPager {
         void onBindItem(T holder, int position);
 
         void changeListener(int position, float offset);
-
-        void itemClick(View view, int position);
 
         void selectListener(int position);
     }

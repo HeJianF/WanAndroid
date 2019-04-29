@@ -16,7 +16,7 @@ import io.reactivex.subjects.BehaviorSubject;
  * @author heJianfeng
  * @date 2019/3/22
  */
-public abstract class BaseLifecyclePresenter<V extends MvpView> extends BasePresenter<V> implements LifecycleProvider<Integer> {
+public abstract class MvpLifecyclePresenter<V extends MvpView> extends MvpPresenter<V> implements LifecycleProvider<Integer> {
 
     private final BehaviorSubject<Integer> behaviorSubject = BehaviorSubject.create();
 
