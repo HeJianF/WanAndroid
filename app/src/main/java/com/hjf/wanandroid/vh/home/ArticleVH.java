@@ -33,5 +33,9 @@ public class ArticleVH extends BaseViewHolder<ArticleInfo.DataBean.DatasBean> {
         article_title.setText(data.getTitle());
         article_author.setText(data.getAuthor());
         article_nice_date.setText(data.getNiceDate());
+
+        itemView.setId(R.id.item_article);
+        itemView.setTag(R.id.link_url, data.getLink());
+        itemView.setOnClickListener(mListener);
     }
 }

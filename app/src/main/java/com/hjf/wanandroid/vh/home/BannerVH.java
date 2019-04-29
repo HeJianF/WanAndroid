@@ -15,7 +15,6 @@ import com.hjf.wanandroid.been.BannerInfo;
 import com.hjf.wanandroid.utils.CommonUtil;
 import com.hjf.wanandroid.utils.ImageLoaderUtils;
 import com.hjf.wanandroid.utils.ScreenUtil;
-import com.hjf.wanandroid.utils.ToastUtils;
 import com.hjf.wanandroid.vh.BaseViewHolder;
 import com.hjf.wanandroid.vh.home.banner.LoopView;
 
@@ -68,8 +67,10 @@ public class BannerVH extends BaseViewHolder<List<BannerInfo.DataBean>> implemen
     public void onBindItem(BannerVH.Holder holder, int position) {
         holder.title.setText(datas.get(position).getTitle());
         ImageLoaderUtils.instance().disImage(WanApplication.getContext(), datas.get(position).getImagePath(), holder.imageView);
-        holder.imageView.setTag(R.id.item_banner, datas.get(position).getUrl());
-        holder.imageView.setOnClickListener(mListener);
+
+        holder.itemView.setId(R.id.item_banner);
+        holder.itemView.setTag(R.id.link_url, datas.get(position).getUrl());
+        holder.itemView.setOnClickListener(mListener);
     }
 
     @Override

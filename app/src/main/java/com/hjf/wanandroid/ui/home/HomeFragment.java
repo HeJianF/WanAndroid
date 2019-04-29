@@ -41,8 +41,9 @@ public class HomeFragment extends BaseListFragment<CommonItem, HomePresenter> im
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
-            case R.id.iv_home_banner_img:
-                Object object = v.getTag(R.id.item_banner);
+            case R.id.item_banner:
+            case R.id.item_article:
+                Object object = v.getTag(R.id.link_url);
                 if (object instanceof String) {
                     String url = (String) object;
                     WebActivity.start(getContext(), url);
@@ -51,5 +52,4 @@ public class HomeFragment extends BaseListFragment<CommonItem, HomePresenter> im
             default:
         }
     }
-
 }

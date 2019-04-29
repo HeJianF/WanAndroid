@@ -2,4 +2,6 @@
 <resources>
     <item name="recyclerView" type="id" />
     <item name="item_banner" type="id" />
+    <item name="item_article" type="id" />
+    <item name="link_url" type="id" />
 </resources>
