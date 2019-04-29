@@ -7,7 +7,6 @@ import com.hjf.wanandroid.been.ArticleInfo;
 import com.hjf.wanandroid.been.BannerInfo;
 import com.hjf.wanandroid.been.CommonItem;
 import com.hjf.wanandroid.config.net.api.ApiFactory;
-import com.hjf.wanandroid.config.net.api.HomeApi;
 import com.hjf.wanandroid.rx.SimpleObserver;
 import com.hjf.wanandroid.utils.CommonUtil;
 import com.hjf.wanandroid.utils.Constant;

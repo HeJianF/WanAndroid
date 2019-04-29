@@ -39,7 +39,9 @@ public abstract class BaseListFragment<E, P extends BaseListPresenter> extends B
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mPresenter = providePresenter();
-        mPresenter.attachView(this);
+        if (mPresenter != null) {
+            mPresenter.attachView(this);
+        }
     }
 
     @Override

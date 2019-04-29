@@ -9,6 +9,7 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.hjf.wanandroid.base.mvp.MvpLifecyclePresenter;
 import com.hjf.wanandroid.base.mvp.MvpPresenter;
 import com.hjf.wanandroid.base.mvp.MvpView;
 import com.trello.rxlifecycle3.components.support.RxFragment;
@@ -20,7 +21,7 @@ import butterknife.ButterKnife;
  * @email hjfstory@foxmail.com
  * @date 2019-04-27
  */
-public abstract class BaseFragment<P extends MvpPresenter> extends RxFragment implements MvpView {
+public abstract class BaseFragment<P extends MvpLifecyclePresenter> extends RxFragment implements MvpView {
 
     protected Context mContext;
     protected View mView;
