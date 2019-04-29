@@ -1,9 +1,7 @@
 package com.hjf.wanandroid.base.list.fragment;
 
-import android.os.Bundle;
 import android.text.TextUtils;
 
-import androidx.annotation.Nullable;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
@@ -36,28 +34,16 @@ public abstract class BaseListFragment<E, P extends BaseListPresenter> extends B
     protected abstract BaseAdapter<E> provideAdapter();
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
+    public int provideLayoutId() {
+        return R.layout.item_list;
+    }
+
+    @Override
+    protected void initPresenter() {
         mPresenter = providePresenter();
         if (mPresenter != null) {
             mPresenter.attachView(this);
         }
-    }
-
-    @Override
-    public void onDestroyView() {
-        if (mAdapter != null) {
-            recycle_view.setAdapter(null);
-        }
-        super.onDestroyView();
-        if (mPresenter != null) {
-            mPresenter.detachView();
-        }
-    }
-
-    @Override
-    public int provideLayoutId() {
-        return R.layout.item_list;
     }
 
     @Override
@@ -103,4 +89,16 @@ public abstract class BaseListFragment<E, P extends BaseListPresenter> extends B
         mAdapter.onShowEmpty(TextUtils.isEmpty(emptyInfo) ? Constant.RESPONSE_EMPTY : emptyInfo);
         mLoadingMoreScrollListener.loadingFinish();
     }
+
+    @Override
+    public void onDestroyView() {
+        if (mAdapter != null) {
+            recycle_view.setAdapter(null);
+        }
+        super.onDestroyView();
+        if (mPresenter != null) {
+            mPresenter.detachView();
+        }
+    }
+
 }

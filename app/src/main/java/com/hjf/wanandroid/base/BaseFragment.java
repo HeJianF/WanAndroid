@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.hjf.wanandroid.base.mvp.MvpLifecyclePresenter;
-import com.hjf.wanandroid.base.mvp.MvpPresenter;
 import com.hjf.wanandroid.base.mvp.MvpView;
 import com.trello.rxlifecycle3.components.support.RxFragment;
 
@@ -38,17 +37,21 @@ public abstract class BaseFragment<P extends MvpLifecyclePresenter> extends RxFr
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) mView = inflater.inflate(provideLayoutId(), container, false);
         ButterKnife.bind(this, mView);
-        mPresenter = providePresenter();
-        if (mPresenter != null) {
-            mPresenter.attachView(this);
-        }
+        initPresenter();
         initOnCreateView();
         return mView;
     }
 
-    public abstract P providePresenter();
+    protected void initPresenter() {
+        mPresenter = providePresenter();
+        if (mPresenter != null) {
+            mPresenter.attachView(this);
+        }
+    }
 
-    public abstract int provideLayoutId();
+    protected abstract P providePresenter();
+
+    protected abstract int provideLayoutId();
 
     protected abstract void initOnCreateView();
 
