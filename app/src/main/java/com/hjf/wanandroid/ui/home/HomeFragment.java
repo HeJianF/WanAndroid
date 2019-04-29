@@ -7,6 +7,7 @@ import com.hjf.wanandroid.adapter.BaseAdapter;
 import com.hjf.wanandroid.adapter.HomeAdapter;
 import com.hjf.wanandroid.base.list.fragment.BaseListFragment;
 import com.hjf.wanandroid.been.CommonItem;
+import com.hjf.wanandroid.ui.WebActivity;
 import com.hjf.wanandroid.utils.ToastUtils;
 
 /**
@@ -44,7 +45,7 @@ public class HomeFragment extends BaseListFragment<CommonItem, HomePresenter> im
                 Object object = v.getTag(R.id.item_banner);
                 if (object instanceof String) {
                     String url = (String) object;
-
+                    WebActivity.start(getContext(), url);
                 }
                 break;
             default:
