@@ -1,11 +1,10 @@
-package com.hjf.wanandroid.ui.home;
+package com.hjf.wanandroid.module.home;
 
-import com.hjf.wanandroid.adapter.HomeAdapter;
 import com.hjf.wanandroid.base.list.fragment.BaseListPresenter;
 import com.hjf.wanandroid.base.mvp.rxlifecycle.PresenterEvent;
-import com.hjf.wanandroid.been.ArticleInfo;
-import com.hjf.wanandroid.been.BannerInfo;
-import com.hjf.wanandroid.been.CommonItem;
+import com.hjf.wanandroid.entity.ArticleInfo;
+import com.hjf.wanandroid.entity.BannerInfo;
+import com.hjf.wanandroid.entity.CommonItem;
 import com.hjf.wanandroid.config.net.api.ApiFactory;
 import com.hjf.wanandroid.rx.SimpleObserver;
 import com.hjf.wanandroid.utils.CommonUtil;

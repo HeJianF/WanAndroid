@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.hjf.wanandroid.R;
-import com.hjf.wanandroid.adapter.BaseAdapter;
+import com.hjf.wanandroid.base.BaseAdapter;
 import com.hjf.wanandroid.base.BaseFragment;
 import com.hjf.wanandroid.utils.CommonUtil;
 import com.hjf.wanandroid.utils.Constant;
@@ -35,11 +35,11 @@ public abstract class BaseListFragment<E, P extends BaseListPresenter> extends B
 
     @Override
     public int provideLayoutId() {
-        return R.layout.item_list;
+        return R.layout.fragment_list;
     }
 
     @Override
-    final protected void initPresenter() {
+    final protected void initBasePresenter() {
         mPresenter = providePresenter();
         if (mPresenter != null) {
             mPresenter.attachView(this);

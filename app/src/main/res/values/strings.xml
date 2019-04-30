@@ -1,21 +1,11 @@
 <resources>
     <string name="app_name">WanAndroid</string>
 
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="net_err">网络错误，点击屏幕重新加载</string>
     <string name="_article_author">作者：</string>
     <string name="_article_time">时间：</string>
-
-    <!-- Empty View -->
-    <string name="empty_view_error">点击屏幕，重新加载</string>
-
-    <!-- Error View -->
     <string name="error_view_net">网络请求失败</string>
-    <string name="error_view_net_new">网络异常，点击屏幕重新加载</string>
-
-
-    <!-- loading View -->
     <string name="loading_view_no_more">喂喂，你碰到我的底线了</string>
-
+    <string name="ad">广告</string>
+    <string name="re_loading">重新加载中…</string>
 </resources>

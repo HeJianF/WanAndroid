@@ -37,12 +37,12 @@ public abstract class BaseFragment<P extends MvpLifecyclePresenter> extends RxFr
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         if (mView == null) mView = inflater.inflate(provideLayoutId(), container, false);
         ButterKnife.bind(this, mView);
-        initPresenter();
+        initBasePresenter();
         initOnCreateView();
         return mView;
     }
 
-    protected void initPresenter() {
+    protected void initBasePresenter() {
         mPresenter = providePresenter();
         if (mPresenter != null) {
             mPresenter.attachView(this);

@@ -1,11 +1,11 @@
-package com.hjf.wanandroid.vh.home;
+package com.hjf.wanandroid.module.home;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.hjf.wanandroid.R;
-import com.hjf.wanandroid.been.ArticleInfo;
+import com.hjf.wanandroid.entity.ArticleInfo;
 import com.hjf.wanandroid.vh.BaseViewHolder;
 
 import butterknife.BindView;

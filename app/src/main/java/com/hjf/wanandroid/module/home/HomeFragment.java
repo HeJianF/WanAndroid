@@ -1,12 +1,11 @@
-package com.hjf.wanandroid.ui.home;
+package com.hjf.wanandroid.module.home;
 
 import android.view.View;
 
 import com.hjf.wanandroid.R;
-import com.hjf.wanandroid.adapter.BaseAdapter;
-import com.hjf.wanandroid.adapter.HomeAdapter;
+import com.hjf.wanandroid.base.BaseAdapter;
 import com.hjf.wanandroid.base.list.fragment.BaseListFragment;
-import com.hjf.wanandroid.been.CommonItem;
+import com.hjf.wanandroid.entity.CommonItem;
 import com.hjf.wanandroid.ui.WebActivity;
 import com.hjf.wanandroid.utils.ToastUtils;
 
@@ -28,13 +27,13 @@ public class HomeFragment extends BaseListFragment<CommonItem, HomePresenter> im
 
     @Override
     public void onRetryListener() {
-        ToastUtils.showToast("重新加载中...");
+        ToastUtils.showToast(getString(R.string.re_loading));
         mPresenter.start();
     }
 
     @Override
     public void onFooterRetryListener() {
-        ToastUtils.showToast("重新加载中...");
+        ToastUtils.showToast(getString(R.string.re_loading));
         mPresenter.onLoadingMore();
     }
 

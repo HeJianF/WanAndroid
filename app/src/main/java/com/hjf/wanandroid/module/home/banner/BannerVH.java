@@ -1,4 +1,4 @@
-package com.hjf.wanandroid.vh.home;
+package com.hjf.wanandroid.module.home.banner;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -11,12 +11,11 @@ import androidx.annotation.NonNull;
 import com.hjf.wanandroid.R;
 import com.hjf.wanandroid.app.WanApplication;
 import com.hjf.wanandroid.base.widget.RatioFrameLayout;
-import com.hjf.wanandroid.been.BannerInfo;
+import com.hjf.wanandroid.entity.BannerInfo;
 import com.hjf.wanandroid.utils.CommonUtil;
 import com.hjf.wanandroid.utils.ImageLoaderUtils;
 import com.hjf.wanandroid.utils.ScreenUtil;
 import com.hjf.wanandroid.vh.BaseViewHolder;
-import com.hjf.wanandroid.vh.home.banner.LoopView;
 
 import java.util.List;
 

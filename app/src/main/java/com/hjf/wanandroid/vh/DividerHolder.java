@@ -11,7 +11,7 @@ import com.hjf.wanandroid.R;
 public class DividerHolder extends BaseViewHolder<Object> {
 
     public DividerHolder(ViewGroup parent) {
-        super(R.layout.holder_divider, parent);
+        super(R.layout.vh_common_divider, parent);
     }
 
     @Override

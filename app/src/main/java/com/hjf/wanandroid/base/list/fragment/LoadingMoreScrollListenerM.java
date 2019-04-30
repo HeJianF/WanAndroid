@@ -3,7 +3,7 @@ package com.hjf.wanandroid.base.list.fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.hjf.wanandroid.adapter.BaseAdapter;
+import com.hjf.wanandroid.base.BaseAdapter;
 
 public class LoadingMoreScrollListenerM extends RecyclerView.OnScrollListener {
     private static final int LAST_VISIBLE_COUNT_TO_LOADING = 2;

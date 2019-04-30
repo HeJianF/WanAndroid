@@ -12,7 +12,7 @@ import com.hjf.wanandroid.R;
 public class AdViewHolder extends BaseViewHolder {
 
     public AdViewHolder(ViewGroup parent) {
-        super(R.layout.ad_item, parent);
+        super(R.layout.vh_common_ad, parent);
     }
 
     @Override

@@ -1,4 +1,4 @@
-package com.hjf.wanandroid.vh.home.banner;
+package com.hjf.wanandroid.module.home.banner;
 
 import android.content.Context;
 import android.os.Handler;

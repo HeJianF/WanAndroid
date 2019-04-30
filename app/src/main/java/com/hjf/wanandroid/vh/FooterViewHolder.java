@@ -36,12 +36,12 @@ public class FooterViewHolder extends BaseViewHolder<Integer> {
     View line2;
 
     public FooterViewHolder(Context context, View.OnClickListener listener) {
-        super(LayoutInflater.from(context).inflate(R.layout.holder_footer, null));
+        super(LayoutInflater.from(context).inflate(R.layout.vh_common_footer, null));
         errorView.setOnClickListener(listener);
     }
 
     public FooterViewHolder(Context context, ViewGroup parent) {
-        super(LayoutInflater.from(context).inflate(R.layout.holder_footer, null));
+        super(LayoutInflater.from(context).inflate(R.layout.vh_common_footer, null));
     }
 
     public void bind(Integer data) {

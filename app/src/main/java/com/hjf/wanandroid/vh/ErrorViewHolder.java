@@ -19,7 +19,7 @@ public class ErrorViewHolder extends BaseViewHolder<String> {
     TextView errorText;
 
     public ErrorViewHolder(ViewGroup parent, View.OnClickListener listener) {
-        super(R.layout.layout_error, parent, listener, true);
+        super(R.layout.vh_common_error, parent, listener, true);
         itemView.setOnClickListener(mListener);
     }
 

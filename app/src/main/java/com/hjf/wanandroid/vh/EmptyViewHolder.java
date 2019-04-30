@@ -17,7 +17,7 @@ public class EmptyViewHolder extends BaseViewHolder<String> {
     TextView tv_empty;
 
     public EmptyViewHolder(ViewGroup parent) {
-        super(R.layout.holder_empty, parent);
+        super(R.layout.vh_common_empty, parent);
     }
 
     @Override

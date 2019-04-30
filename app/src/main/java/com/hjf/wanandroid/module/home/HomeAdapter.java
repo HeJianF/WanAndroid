@@ -1,14 +1,14 @@
-package com.hjf.wanandroid.adapter;
+package com.hjf.wanandroid.module.home;
 
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.hjf.wanandroid.been.CommonItem;
+import com.hjf.wanandroid.base.BaseAdapter;
+import com.hjf.wanandroid.entity.CommonItem;
 import com.hjf.wanandroid.vh.BaseViewHolder;
 import com.hjf.wanandroid.vh.DividerHolder;
-import com.hjf.wanandroid.vh.home.ArticleVH;
-import com.hjf.wanandroid.vh.home.BannerVH;
+import com.hjf.wanandroid.module.home.banner.BannerVH;
 
 import androidx.annotation.NonNull;
 

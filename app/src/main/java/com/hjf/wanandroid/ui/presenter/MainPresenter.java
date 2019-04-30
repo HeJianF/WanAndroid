@@ -1,6 +1,7 @@
-package com.hjf.wanandroid.ui;
+package com.hjf.wanandroid.ui.presenter;
 
 import com.hjf.wanandroid.base.mvp.MvpLifecyclePresenter;
+import com.hjf.wanandroid.ui.MainActivity;
 
 /**
  * @author Jianfeng He
@@ -10,6 +11,5 @@ import com.hjf.wanandroid.base.mvp.MvpLifecyclePresenter;
 public class MainPresenter extends MvpLifecyclePresenter<MainActivity> {
     @Override
     public void start() {
-
     }
 }

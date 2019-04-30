@@ -1,4 +1,4 @@
-package com.hjf.wanandroid.adapter;
+package com.hjf.wanandroid.base;
 
 import android.content.Context;
 import android.view.View;
@@ -38,7 +38,7 @@ public abstract class BaseAdapter<E> extends RecyclerView.Adapter<BaseViewHolder
     protected Context mContext;
     public static int MIN_COUNT_SHOW_FOOTER = 10;
     protected FooterViewHolder mFooterViewHolder;
-    List<E> mList = new ArrayList<>();
+    protected List<E> mList = new ArrayList<>();
 
     public BaseAdapter(Context context) {
         this.mContext = context;

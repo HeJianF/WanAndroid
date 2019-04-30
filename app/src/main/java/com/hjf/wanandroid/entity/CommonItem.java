@@ -1,4 +1,4 @@
-package com.hjf.wanandroid.been;
+package com.hjf.wanandroid.entity;
 
 /**
  * @author heJianfeng

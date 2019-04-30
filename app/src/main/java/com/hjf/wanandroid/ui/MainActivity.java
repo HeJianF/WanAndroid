@@ -4,7 +4,8 @@ import android.os.Bundle;
 
 import com.hjf.wanandroid.R;
 import com.hjf.wanandroid.base.BaseActivity;
-import com.hjf.wanandroid.ui.home.HomeFragment;
+import com.hjf.wanandroid.module.home.HomeFragment;
+import com.hjf.wanandroid.ui.presenter.MainPresenter;
 
 public class MainActivity extends BaseActivity<MainPresenter> {
 

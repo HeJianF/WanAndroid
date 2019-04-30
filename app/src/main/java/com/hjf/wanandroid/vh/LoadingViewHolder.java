@@ -11,7 +11,7 @@ import com.hjf.wanandroid.R;
 public class LoadingViewHolder extends BaseViewHolder {
 
     public LoadingViewHolder(ViewGroup parent) {
-        super(R.layout.layout_loading, parent);
+        super(R.layout.vh_common_loading, parent);
     }
 
     @Override

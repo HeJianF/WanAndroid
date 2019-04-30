@@ -1,7 +1,7 @@
 package com.hjf.wanandroid.config.net.api;
 
-import com.hjf.wanandroid.been.ArticleInfo;
-import com.hjf.wanandroid.been.BannerInfo;
+import com.hjf.wanandroid.entity.ArticleInfo;
+import com.hjf.wanandroid.entity.BannerInfo;
 
 import io.reactivex.Observable;
 import retrofit2.http.GET;
