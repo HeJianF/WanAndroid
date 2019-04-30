@@ -68,7 +68,11 @@ public class LoopView extends ViewPager {
         } else {
             adapter.notifyDataSetChanged();
         }
-        setCurrentItem(loopSize, false);
+        if (lastPosition == -1) {
+            setCurrentItem(loopSize, false);
+        } else {
+            setCurrentItem(lastPosition, false);
+        }
         startLoop();
     }
 

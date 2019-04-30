@@ -39,7 +39,7 @@ public abstract class BaseListFragment<E, P extends BaseListPresenter> extends B
     }
 
     @Override
-    protected void initPresenter() {
+    final protected void initPresenter() {
         mPresenter = providePresenter();
         if (mPresenter != null) {
             mPresenter.attachView(this);
